@@ -13,13 +13,15 @@ Update-FormatData -AppendPath .\__display.formats.ps1xml
 . .\Remove-ICSession.ps1
 . .\Get-ICSessionStatus.ps1
 . .\Get-ICUserStatus.ps1
+. .\Get-ICUser.ps1
 . .\Get-ICUsers.ps1
 . .\New-ICUser.ps1
-. .\Get-ICUser.ps1
+. .\New-ICUsers.ps1
 . .\Remove-ICUser.ps1
-. .\Get-ICWorkgroups.ps1
 . .\Get-ICWorkgroup.ps1
+. .\Get-ICWorkgroups.ps1
 . .\New-ICWorkgroup.ps1
+. .\New-ICWorkgroups.ps1
 . .\Remove-ICWorkgroup.ps1
 . .\New-ICConfigurationId.ps1
 . .\Get-IPAProcesses.ps1
@@ -32,6 +34,9 @@ Update-FormatData -AppendPath .\__display.formats.ps1xml
 . .\New-ICSkill.ps1
 . .\Remove-ICSkill.ps1
 . .\Get-ICLicenseAllocations.ps1
+. .\Import-AttProfile.ps1
+. .\Export-AttProfile.ps1
+. .\Set-ICLicense.ps1
 Pop-Location
 
 Export-ModuleMember `
@@ -40,13 +45,15 @@ Export-ModuleMember `
     'Remove-ICSession',
     'Get-ICSessionStatus',
     'Get-ICUserStatus',
+    'Get-ICUser',
     'Get-ICUsers',
     'New-ICUser',
-    'Get-ICUser',
+    'New-ICUsers',
     'Remove-ICUser',
-    'Get-ICWorkgroups',
     'Get-ICWorkgroup',
+    'Get-ICWorkgroups',
     'New-ICWorkgroup',
+    'New-ICWorkgroups',
     'Remove-ICWorkgroup',
     'New-ICConfigurationId',
     'Get-IPAProcesses',
@@ -58,5 +65,8 @@ Export-ModuleMember `
     'Get-ICSkill',
     'New-ICSkill',
     'Remove-ICSkill',
-    'Get-ICLicenseAllocations'
+    'Get-ICLicenseAllocations',
+    'Import-AttProfile',
+    'Export-AttProfile',
+    'Set-ICLicense'
   )

@@ -43,7 +43,6 @@ $cic = New-ICSession -ComputerName $cicServer -User $cicUser -Password $cicPassw
 # Users #
 #########
 
-
 # Get all users
 Get-ICUsers $cic
 
@@ -102,6 +101,11 @@ Remove-ICUser $cic -User $cicTestUser
 New-ICUser $cic -User $cicTestUser -SecurityRights "*" -AccessRights "*" -AdministrativeRights "*" # Only All (*) administrative rights are supported for now
 Remove-ICUser $cic -User $cicTestUser
 
+# Test creating a new user and then set licenses
+New-ICUser $cic -User $cicTestUser -Password '12345'
+Set-ICLicense $cic -User $cicTestUser -HasClientAccess $true -MediaLevel 3 -LicenseActive $true -AdditionalLicenses @("*")
+Remove-ICUser $cic -User $cicTestUser
+
 ##########
 # Skills #
 ##########
@@ -132,11 +136,14 @@ Get-ICWorkgroup $cic -Workgroup $cicExistingWorkgroup
 New-ICUser $cic -User 'posh-ictestuser1'
 New-ICUser $cic -User 'posh-ictestuser2'
 New-ICUser $cic -User 'posh-ictestuser3'
-
 New-ICWorkgroup $cic -Workgroup $cicTestWorkgroup -Extension '9010' -Members @('posh-ictestuser1', 'posh-ictestuser2', 'posh-ictestuser3')
-
-# Remove test workgroup
 Remove-ICWorkgroup $cic -Workgroup $cicTestWorkgroup
+
+# Create multiple workgroups with or without members
+New-ICWorkgroups $cic -ICWorkgroups '{"randomstring":{"workgroupname":"testcicworkgroup1","extension":"6001"}, "anotherrandomstring":{"workgroupname":"testcicworkgroup2","extension":"6002","members":["posh-ictestuser1","posh-ictestuser2"]}}'
+
+Remove-ICWorkgroup $cic -Workgroup "testcicworkgroup1"
+Remove-ICWorkgroup $cic -Workgroup "testcicworkgroup2"
 
 # Remove test users
 Remove-ICUser $cic -User 'posh-ictestuser1'
@@ -154,7 +161,7 @@ Remove-ICUser $cic -User 'posh-ictestuser2'
 # IPA #
 #######
 <# !! Getting 403 (Forbidden) !! #>
-<#Get-IPAProcesses $cic#> 
+<#Get-IPAProcesses $cic#>
 <#Get-IPAProcess $cic $cicTestIPAProcess#>
 <#Start-IPAProcess $cic -DefinitionId $cicTestIPAProcess#>
 
